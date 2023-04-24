@@ -1,5 +1,5 @@
 "use client"
-import { ListItem, List, Box, Unstable_Grid2 as Grid, Typography } from "@/components/Mui";
+import { ListItem, List, Unstable_Grid2 as Grid, Typography } from "@mui/material";
 import { getFormattedDate } from "@/utils/dates";
 import { Entry } from "@/utils/types";
 
@@ -16,11 +16,11 @@ const EntriesList = (props: EntriesListProps) => {
   return (
     <List>
       {entries.map(entry => (
-        <ListItem key={entry.id} sx={{ height: "4rem", borderBottom: "2px solid white" }}>
+        <ListItem key={entry.id} sx={{ height: "4rem", borderBottom: "2px solid white", padding: 0 }}>
           <Grid container wrap="nowrap" width="100%" gap=".5rem">
             <Grid flexBasis="2.813rem">
               {getFormattedDate(entry.date).split(" ").map((part) =>
-                <Typography textAlign="center">
+                <Typography key={part} textAlign="center">
                   {part}
                 </Typography>)}
             </Grid>

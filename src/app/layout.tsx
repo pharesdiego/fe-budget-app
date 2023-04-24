@@ -2,6 +2,7 @@ import './globals.css'
 import { alata } from "./fonts";
 import ThemeProvider from '@/theme';
 import LayoutContainer from "./container";
+import Topbar from '@/components/Topbar';
 
 export const metadata = {
   title: 'Veloz Budget',
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en" className={alata.className}>
       <ThemeProvider>
         <LayoutContainer>
+          <Topbar />
           {children}
         </LayoutContainer>
       </ThemeProvider>

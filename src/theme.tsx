@@ -1,5 +1,5 @@
 "use client"
-import { ThemeProvider } from "@/components/Mui";
+import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
 import React from "react";
 
@@ -21,7 +21,7 @@ const theme = createTheme({
       main: "#96FF7C",
     },
     background: {
-      default: "#000"
+      default: "#121212"
     }
   },
   typography: {
@@ -38,8 +38,32 @@ const theme = createTheme({
       fontSize: "14px",
       lineHeight: "19.32px",
     },
+    h1: {
+      fontSize: "20px",
+      lineHeight: "27.6px",
+    },
     allVariants: {
       color: "#fff"
+    }
+  },
+  components: {
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fill: "#fff",
+          verticalAlign: "middle",
+          fontSize: "2rem"
+        }
+      }
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            backgroundColor: "#ffffff33",
+          },
+        }
+      }
     }
   }
 });
