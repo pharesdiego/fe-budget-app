@@ -1,5 +1,20 @@
 import dayjs from "dayjs";
 
-export const getFormattedDate = (iso8601: string) => {
-  return dayjs(iso8601).format("DD MMM");
+export enum DateFormats {
+  EntryDateFormat = "DD MMM",
+  DateSelectorDateFormat = "MMMM YYYY",
+  QSDateFormat = "YYYY-MM",
+}
+
+
+export const getFormattedDate = (isoDate: string | dayjs.Dayjs, format: DateFormats) => {
+  return dayjs(isoDate).format(format);
+}
+
+export const getNextMonth = (isoDate: string) => {
+  return dayjs(isoDate).add(1, "month");
+}
+
+export const getPreviousMonth = (isoDate: string) => {
+  return dayjs(isoDate).add(-1, "month");
 }

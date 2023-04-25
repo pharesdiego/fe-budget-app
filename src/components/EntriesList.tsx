@@ -1,6 +1,6 @@
 "use client"
 import { ListItem, List, Unstable_Grid2 as Grid, Typography } from "@mui/material";
-import { getFormattedDate } from "@/utils/dates";
+import { DateFormats, getFormattedDate } from "@/utils/dates";
 import { Entry } from "@/utils/types";
 
 interface EntriesListProps {
@@ -19,7 +19,7 @@ const EntriesList = (props: EntriesListProps) => {
         <ListItem key={entry.id} sx={{ height: "4rem", borderBottom: "2px solid white", padding: 0 }}>
           <Grid container wrap="nowrap" width="100%" gap=".5rem">
             <Grid flexBasis="2.813rem">
-              {getFormattedDate(entry.date).split(" ").map((part) =>
+              {getFormattedDate(entry.date, DateFormats.EntryDateFormat).split(" ").map((part) =>
                 <Typography key={part} textAlign="center">
                   {part}
                 </Typography>)}
