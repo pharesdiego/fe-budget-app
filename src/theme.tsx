@@ -68,6 +68,7 @@ const theme = createTheme({
   }
 });
 
+// eslint-disable-next-line
 export default ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider theme={theme}>
     {children}
