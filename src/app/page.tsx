@@ -16,7 +16,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
   return (
     <main>
       <DateSelector />
-      <Balances />
+      <Balances entries={entries} />
       <EntriesList entries={entries} />
       <FloatingButton />
     </main>

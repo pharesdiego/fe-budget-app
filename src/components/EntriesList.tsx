@@ -2,6 +2,7 @@
 import { ListItem, List, Unstable_Grid2 as Grid, Typography } from "@mui/material";
 import { DateFormats, getFormattedDate } from "@/utils/dates";
 import { Entry } from "@/utils/types";
+import { getFormattedCurrency } from "@/utils/numbers";
 
 interface EntriesListProps {
   entries: Entry[]
@@ -41,7 +42,7 @@ const EntriesList = (props: EntriesListProps) => {
               <Typography sx={theme => ({
                 color: isLessThan0(entry.amount) ? theme.palette.error.main : theme.palette.success.main
               })}>
-                {entry.amount}
+                {getFormattedCurrency(entry.amount)}
               </Typography>
             </Grid>
           </Grid>

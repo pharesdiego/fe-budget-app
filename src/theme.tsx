@@ -12,7 +12,7 @@ const theme = createTheme({
       main: "#000",
     },
     grey: {
-      "400": "#767676",
+      "400": "#9E9E9E",
     },
     error: {
       main: "#FF7C7C",
