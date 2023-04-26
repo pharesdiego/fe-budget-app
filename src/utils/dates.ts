@@ -6,15 +6,31 @@ export enum DateFormats {
   QSDateFormat = "YYYY-MM",
 }
 
+export type ISODate = string | dayjs.Dayjs
 
-export const getFormattedDate = (isoDate: string | dayjs.Dayjs, format: DateFormats) => {
-  return dayjs(isoDate).format(format);
+
+export const getFormattedDate = (date: ISODate, format: DateFormats) => {
+  return dayjs(date).format(format);
 }
 
-export const getNextMonth = (isoDate: string) => {
-  return dayjs(isoDate).add(1, "month");
+export const getNextMonth = (date: ISODate) => {
+  return dayjs(date).add(1, "month");
 }
 
-export const getPreviousMonth = (isoDate: string) => {
-  return dayjs(isoDate).add(-1, "month");
+export const getPreviousMonth = (date: ISODate) => {
+  return dayjs(date).add(-1, "month");
+}
+
+export const getISODate = (date: ISODate) => {
+  return dayjs(date).toISOString();
+}
+
+export const getToday = () => dayjs();
+
+export const getStartOfMonth = (date: ISODate) => {
+  return dayjs(date).startOf("month");
+}
+
+export const getEndOfMonth = (date: ISODate) => {
+  return dayjs(date).endOf("month");
 }
