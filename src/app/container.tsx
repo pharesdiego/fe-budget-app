@@ -1,5 +1,7 @@
 "use client"
 import { Box } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 const Container = ({ children }: { children: React.ReactNode }) => {
   return <Box component="body" sx={(theme) => ({
@@ -13,7 +15,9 @@ const Container = ({ children }: { children: React.ReactNode }) => {
       gap: "1rem",
     }
   })}>
-    {children}
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      {children}
+    </LocalizationProvider>
   </Box>
 }
 

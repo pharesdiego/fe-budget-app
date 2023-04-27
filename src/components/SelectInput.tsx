@@ -3,14 +3,20 @@ import { TextField, StandardTextFieldProps, MenuItem, Box } from "@mui/material"
 import TextInput from "./TextInput";
 import { colors } from "@/theme";
 
-interface SelectInputProps extends StandardTextFieldProps { }
+export interface SelectOption {
+  value: string | number;
+  label: string;
+}
+
+interface SelectInputProps extends StandardTextFieldProps {
+  options: SelectOption[];
+}
 
 const SelectInput = (props: SelectInputProps) => {
-  const { placeholder } = props;
+  const { placeholder, options, ...rest } = props;
 
   return (
     <TextInput
-      label="Account"
       select
       SelectProps={{
         defaultValue: "",
@@ -29,22 +35,19 @@ const SelectInput = (props: SelectInputProps) => {
             })}>{placeholder}</Box>
           }
 
-          return <p>{val}</p>
+          return <p>{val as string}</p>
         }
       }}
+      {...rest}
     >
       <MenuItem value="" disabled>
         {placeholder}
       </MenuItem>
-      <MenuItem value="Bank">
-        Bank
-      </MenuItem>
-      <MenuItem value="Savings">
-        Savings
-      </MenuItem>
-      <MenuItem value="Other">
-        Other
-      </MenuItem>
+      {options.map((option) => (
+        <MenuItem key={option.value} value={option.value}>
+          {option.label}
+        </MenuItem>
+      ))}
     </TextInput>
   )
 }

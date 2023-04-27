@@ -81,7 +81,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: colors.grey,
-          borderRadius: "10px",
+          borderRadius: "10px !important",
           height: "3.5rem",
           marginTop: "0 !important",
           "&.Mui-focused": {
@@ -89,6 +89,12 @@ const theme = createTheme({
             boxShadow: "0px 6px 9px 3px #020202",
           },
         },
+        input: {
+          "&::placeholder": {
+            color: "#9E9E9E",
+            opacity: 1,
+          }
+        }
       }
     },
     MuiInput: {
@@ -100,17 +106,17 @@ const theme = createTheme({
           color: "#fff",
           padding: "1rem",
         },
-        input: {
-          "&::placeholder": {
-            color: "#9E9E9E",
-            opacity: 1,
-          }
-        }
       }
     },
     MuiInputLabel: {
       defaultProps: {
         shrink: true,
+      },
+      styleOverrides: {
+        root: {
+          position: "unset",
+          transform: "unset",
+        }
       }
     },
     MuiFormControl: {
@@ -120,6 +126,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           height: "7.25rem",
+          gap: "1rem",
         },
       },
     },
