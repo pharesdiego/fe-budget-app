@@ -151,6 +151,22 @@ const theme = createTheme({
         },
       }
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: "0.75rem",
+          borderRadius: "0.625rem",
+          "& svg": {
+            fontSize: "24px !important",
+          }
+        },
+        contained: {
+          "& svg": {
+            fill: colors.black,
+          }
+        }
+      }
+    }
   },
 });
 

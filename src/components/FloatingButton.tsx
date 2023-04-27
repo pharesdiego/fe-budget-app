@@ -2,6 +2,7 @@
 import AddIcon from '@mui/icons-material/Add';
 
 import { Fab } from "@mui/material"
+import Link from 'next/link';
 
 const FloatingButton = () => {
   return (
@@ -11,9 +12,11 @@ const FloatingButton = () => {
       right: 32,
       backgroundColor: theme.palette.primary.main,
     })}>
-      <AddIcon sx={theme => ({
-        fill: theme.palette.secondary.main
-      })} />
+      <Link href="/entry/create">
+        <AddIcon sx={theme => ({
+          fill: theme.palette.secondary.main
+        })} />
+      </Link>
     </Fab>
   )
 }

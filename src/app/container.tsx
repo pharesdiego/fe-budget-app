@@ -8,7 +8,6 @@ const Container = ({ children }: { children: React.ReactNode }) => {
     backgroundColor: theme.palette.background.default,
     minHeight: "100vh",
     margin: "0 1.5rem",
-    marginBottom: "6rem",
     "& > main": {
       display: "flex",
       flexDirection: "column",

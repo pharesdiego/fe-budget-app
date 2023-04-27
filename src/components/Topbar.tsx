@@ -3,6 +3,7 @@ import { pacifico } from "@/app/fonts";
 import { Unstable_Grid2 as Grid, IconButton, Typography } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
 
 interface TopbarProps { }
 
@@ -16,13 +17,17 @@ const Topbar = (props: TopbarProps) => {
       alignContent="center"
       marginBottom="1.5rem"
     >
-      <Grid>
-        <Typography className={pacifico.className} sx={{
-          fontSize: "1.125rem",
-          lineHeight: "1.978rem"
+      <Grid margin="auto 0">
+        <Link href="/" style={{
+          textDecoration: "none"
         }}>
-          Veloz Budget
-        </Typography>
+          <Typography component="span" className={pacifico.className} sx={{
+            fontSize: "1.125rem",
+            lineHeight: "1.978rem"
+          }}>
+            Veloz Budget
+          </Typography>
+        </Link>
       </Grid>
       <Grid>
         <IconButton>
