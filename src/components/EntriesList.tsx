@@ -30,7 +30,7 @@ const EntriesList = (props: EntriesListProps) => {
                 {entry.category.name}
               </Typography>
               <Typography sx={theme => ({
-                color: theme.palette.grey["400"],
+                color: theme.palette.grey["300"],
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
                 overflow: "hidden",
@@ -38,7 +38,7 @@ const EntriesList = (props: EntriesListProps) => {
                 {entry.description}
               </Typography>
             </Grid>
-            <Grid>
+            <Grid margin="auto">
               <Typography sx={theme => ({
                 color: isLessThan0(entry.amount) ? theme.palette.error.main : theme.palette.success.main
               })}>

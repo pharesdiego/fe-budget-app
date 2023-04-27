@@ -3,6 +3,14 @@ import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
 import React from "react";
 
+export const colors = {
+  white: "#FFF",
+  black: "#000",
+  grey: "#222222",
+  lightGrey: "#515151",
+  lighterGrey: "#9E9E9E",
+}
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -12,7 +20,9 @@ const theme = createTheme({
       main: "#000",
     },
     grey: {
-      "400": "#9E9E9E",
+      "300": colors.lighterGrey,
+      "400": colors.lightGrey,
+      "500": colors.grey,
     },
     error: {
       main: "#FF7C7C",
@@ -64,8 +74,77 @@ const theme = createTheme({
           },
         }
       }
-    }
-  }
+    },
+    MuiInputBase: {
+      defaultProps: {
+      },
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.grey,
+          borderRadius: "10px",
+          height: "3.5rem",
+          marginTop: "0 !important",
+          "&.Mui-focused": {
+            outline: "#656565 solid 2px",
+            boxShadow: "0px 6px 9px 3px #020202",
+          },
+        },
+      }
+    },
+    MuiInput: {
+      defaultProps: {
+        disableUnderline: true,
+      },
+      styleOverrides: {
+        root: {
+          color: "#fff",
+          padding: "1rem",
+        },
+        input: {
+          "&::placeholder": {
+            color: "#9E9E9E",
+            opacity: 1,
+          }
+        }
+      }
+    },
+    MuiInputLabel: {
+      defaultProps: {
+        shrink: true,
+      }
+    },
+    MuiFormControl: {
+      defaultProps: {
+        variant: "standard",
+      },
+      styleOverrides: {
+        root: {
+          height: "7.25rem",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          backgroundColor: colors.grey,
+        }
+      }
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          backgroundColor: colors.grey,
+          "&.Mui-selected": {
+            backgroundColor: colors.lightGrey,
+          },
+          "&.Mui-disabled": {
+            backgroundColor: colors.grey,
+            opacity: 0.4,
+          }
+        },
+      }
+    },
+  },
 });
 
 // eslint-disable-next-line
