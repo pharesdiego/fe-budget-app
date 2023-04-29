@@ -2,7 +2,7 @@ import Balances from "@/components/Balances";
 import DateSelector from "@/components/DateSelector";
 import EntriesList from "@/components/EntriesList";
 import FloatingButton from "@/components/FloatingButton";
-import { getEntries } from "@/services/entries";
+import { getEntries } from "@/services/entry";
 import { getEndOfMonth, getISODate, getStartOfMonth, getToday } from "@/utils/dates";
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | undefined }; }) {

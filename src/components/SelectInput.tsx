@@ -35,7 +35,7 @@ const SelectInput = (props: SelectInputProps) => {
             })}>{placeholder}</Box>
           }
 
-          return <p>{val as string}</p>
+          return <span>{options.find((option) => option.value === val)?.label}</span>
         }
       }}
       {...rest}

@@ -6,17 +6,16 @@ import Link from 'next/link';
 
 const FloatingButton = () => {
   return (
-    <Fab sx={theme => ({
+    <Fab LinkComponent={Link} href="/entry/create" sx={theme => ({
       position: "fixed",
       bottom: 32,
       right: 32,
       backgroundColor: theme.palette.primary.main,
     })}>
-      <Link href="/entry/create">
-        <AddIcon sx={theme => ({
-          fill: theme.palette.secondary.main
-        })} />
-      </Link>
+
+      <AddIcon sx={theme => ({
+        fill: theme.palette.secondary.main
+      })} />
     </Fab>
   )
 }

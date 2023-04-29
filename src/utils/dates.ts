@@ -26,7 +26,7 @@ export const getISODate = (date: ISODate) => {
   return dayjs(date).toISOString();
 }
 
-export const getToday = () => dayjs();
+export const getToday = () => dayjs().startOf("day");
 
 export const getStartOfMonth = (date: ISODate) => {
   return dayjs(date).startOf("month");
