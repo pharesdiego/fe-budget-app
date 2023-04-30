@@ -2,7 +2,7 @@
 import AppButton from "@/components/AppButton";
 import OptionsInput from "@/components/OptionsInput";
 import TextInput from "@/components/TextInput";
-import { createCategory } from "@/services/category";
+import { createAccount } from "@/services/account";
 import { AccountBalanceWallet, Done, Close, AirplanemodeActive, AttachMoney, EscalatorWarning, FolderSpecial, FoodBank, HomeRepairService, LocalGroceryStore, MedicalServices, Payment, SportsTennis, Train } from "@mui/icons-material";
 import { Unstable_Grid2 as Grid } from "@mui/material"
 import { useFormik } from "formik";
@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { object, string } from "yup";
 
-const categoryOptions = [
+const accountOptions = [
   { hideLabel: true, label: "Dollar icon", value: "attach-money", icon: <AttachMoney /> },
   { hideLabel: true, label: "Medical services icon", value: "medical-services", icon: <MedicalServices /> },
   { hideLabel: true, label: "Folder special icon", value: "folder-special", icon: <FolderSpecial /> },
@@ -30,7 +30,7 @@ const validationSchema = object({
   icon: string().required(),
 });
 
-const CreateCategoryForm = () => {
+const CreateAccountForm = () => {
   const [isCreating, setIsCreating] = useState(false);
   const router = useRouter();
   const { handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -42,7 +42,7 @@ const CreateCategoryForm = () => {
     onSubmit: (values) => {
       setIsCreating(true);
 
-      createCategory(values)
+      createAccount(values)
         .then(() => router.push("/"))
         .finally(() => setIsCreating(false));
     }
@@ -54,7 +54,7 @@ const CreateCategoryForm = () => {
         <TextInput
           name="name"
           label="Name"
-          placeholder="Write category's name"
+          placeholder="Write account's name"
           onChange={handleChange}
         />
       </Grid>
@@ -70,7 +70,7 @@ const CreateCategoryForm = () => {
           sx={{
             height: "auto",
           }}
-          options={categoryOptions}
+          options={accountOptions}
         />
       </Grid>
       <Grid display="flex" width="100%" justifyContent="end" gap="1rem">
@@ -94,4 +94,4 @@ const CreateCategoryForm = () => {
   )
 }
 
-export default CreateCategoryForm;
+export default CreateAccountForm;
