@@ -33,7 +33,7 @@ const Topbar = (props: TopbarProps) => {
         <IconButton>
           <SearchIcon />
         </IconButton>
-        <IconButton>
+        <IconButton LinkComponent={Link} href="/menu">
           <MenuIcon />
         </IconButton>
       </Grid>

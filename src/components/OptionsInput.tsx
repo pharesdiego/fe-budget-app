@@ -1,12 +1,16 @@
-import { FormControl, FormControlLabel, FormControlLabelProps, FormControlProps, FormLabel, Radio, RadioGroup, RadioGroupProps } from "@mui/material";
-import { useRef } from "react";
+import { FormControl, FormControlLabel, FormControlLabelProps, FormControlProps, FormLabel, Radio, RadioGroup, RadioGroupProps, formControlLabelClasses } from "@mui/material";
+import React, { useRef } from "react";
+import { visuallyHidden } from '@mui/utils';
 
-export interface OptionsInputOption extends Omit<FormControlLabelProps, "control" | "value"> {
+export interface OptionsInputOption extends Omit<FormControlLabelProps, "control" | "value" | "label"> {
   /**
    * A control element. For instance, it can be a `Radio`, a `Switch` or a `Checkbox`.
    */
-  control?: React.ReactElement<any, any>;
+  label: string;
   value: string;
+  control?: React.ReactElement<any, any>;
+  icon?: React.ReactNode;
+  hideLabel?: boolean;
 }
 
 interface OptionsInput extends Omit<FormControlProps, "onChange"> {
@@ -29,7 +33,22 @@ const OptionsInput = (props: OptionsInput) => {
             key={option.value}
             value={option.value}
             label={option.label}
-            control={<Radio />}
+            control={<Radio icon={option.icon} checkedIcon={option.icon} sx={theme => ({
+              width: "3rem",
+              height: "3rem",
+              ...(option.hideLabel && {
+                "&.Mui-checked": {
+                  background: theme.palette.grey["400"],
+                },
+              }),
+            })} />}
+            sx={{
+              ...(option.hideLabel && {
+                [`& .${formControlLabelClasses.label}`]: visuallyHidden,
+                marginRight: 0,
+                marginLeft: 0,
+              }),
+            }}
           />
         ))}
       </RadioGroup>

@@ -9,6 +9,7 @@ export const colors = {
   grey: "#222222",
   lightGrey: "#515151",
   lighterGrey: "#9E9E9E",
+  commonBoxShadow: "0px 6px 9px 3px #020202",
 }
 
 const theme = createTheme({
