@@ -14,7 +14,7 @@ interface SelectInputProps extends StandardTextFieldProps {
 
 const SelectInput = (props: SelectInputProps) => {
   const { placeholder, options, ...rest } = props;
-
+  const { SelectProps, ...textInputProps } = rest;
   return (
     <TextInput
       select
@@ -36,9 +36,10 @@ const SelectInput = (props: SelectInputProps) => {
           }
 
           return <span>{options.find((option) => option.value === val)?.label}</span>
-        }
+        },
+        ...SelectProps,
       }}
-      {...rest}
+      {...textInputProps}
     >
       <MenuItem value="" disabled>
         {placeholder}

@@ -2,7 +2,7 @@
 import DateInput from "@/components/DateInput";
 import SelectInput, { SelectOption } from "@/components/SelectInput";
 import TextInput from "@/components/TextInput";
-import { Button, Unstable_Grid2 as Grid } from "@mui/material";
+import { Unstable_Grid2 as Grid } from "@mui/material";
 import { useFormik } from "formik";
 import { number, object, string } from "yup";
 import DoneIcon from '@mui/icons-material/Done';
@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import OptionsInput from "@/components/OptionsInput";
 import { getISODate, getToday } from "@/utils/dates";
 import Link from "next/link";
+import AppButton from "@/components/AppButton";
 
 interface CreateEntryFormProps {
   accounts: Account[];
@@ -143,22 +144,21 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
         />
       </Grid>
       <Grid display="flex" width="100%" justifyContent="end" gap="1rem">
-        <Button
+        <AppButton
           variant="text"
           startIcon={<CloseIcon color="secondary" />}
-          LinkComponent={Link}
           href="/"
         >
           Cancel
-        </Button>
-        <Button
-          disabled={isCreating}
+        </AppButton>
+        <AppButton
+          isWorking={isCreating}
           type="submit"
           variant="contained"
           startIcon={<DoneIcon />}
         >
           Create
-        </Button>
+        </AppButton>
       </Grid>
     </Grid>
   )

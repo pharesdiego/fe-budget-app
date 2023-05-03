@@ -1,21 +1,24 @@
+import { baseURL } from "@/utils/constants";
 import { ISODate, getISODate } from "@/utils/dates"
 import { APIResponse, Entry } from "@/utils/types";
 
-interface GetEntriesParams {
+export interface GetEntriesParams {
   from: ISODate;
   until: ISODate;
+  type?: "expense" | "income";
 }
 
-const baseURL = "http://localhost:4000/api/v1"
-
 export const getEntries = async (params: GetEntriesParams): Promise<APIResponse<Entry[]>> => {
-  const { from, until } = params;
+  const { from, until, type } = params;
 
   const queryString = new URLSearchParams({
     from: getISODate(from),
     until: getISODate(until),
   });
 
+  if (type) {
+    queryString.append("type", type);
+  }
 
   return await fetch(`${baseURL}/entries?${queryString.toString()}`, {
     cache: "no-store",

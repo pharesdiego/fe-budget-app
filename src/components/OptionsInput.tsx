@@ -3,12 +3,8 @@ import React, { useRef } from "react";
 import { visuallyHidden } from '@mui/utils';
 
 export interface OptionsInputOption extends Omit<FormControlLabelProps, "control" | "value" | "label"> {
-  /**
-   * A control element. For instance, it can be a `Radio`, a `Switch` or a `Checkbox`.
-   */
   label: string;
   value: string;
-  control?: React.ReactElement<any, any>;
   icon?: React.ReactNode;
   hideLabel?: boolean;
 }
