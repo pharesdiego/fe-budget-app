@@ -16,7 +16,7 @@ const AppButton = (props: AppButtonProps) => {
       href={href}
       startIcon={
         isWorking
-          ? <CircularProgress color="secondary" size={24} />
+          ? <CircularProgress color={buttonProps.variant === "text" ? "primary" : "secondary"} size={24} />
           : buttonProps.startIcon
       }
     />

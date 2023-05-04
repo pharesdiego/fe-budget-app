@@ -1,8 +1,9 @@
 "use client"
-import { ListItem, List, Unstable_Grid2 as Grid, Typography } from "@mui/material";
+import { List, Unstable_Grid2 as Grid, Typography, ListItemButton } from "@mui/material";
 import { DateFormats, getFormattedDate } from "@/utils/dates";
 import { Entry } from "@/utils/types";
 import { getFormattedCurrency } from "@/utils/numbers";
+import Link from "next/link";
 
 interface EntriesListProps {
   entries: Entry[]
@@ -17,7 +18,7 @@ const EntriesList = (props: EntriesListProps) => {
   return (
     <List>
       {entries.map(entry => (
-        <ListItem key={entry.id} sx={{ height: "4rem", borderBottom: "2px solid white", padding: 0 }}>
+        <ListItemButton LinkComponent={Link} href={`/entry/${entry.id}`} key={entry.id} sx={{ height: "4rem", borderBottom: "2px solid white", padding: 0 }}>
           <Grid container wrap="nowrap" width="100%" gap=".5rem">
             <Grid flexBasis="2.813rem">
               {getFormattedDate(entry.date, DateFormats.EntryDateFormat).split(" ").map((part) =>
@@ -46,7 +47,7 @@ const EntriesList = (props: EntriesListProps) => {
               </Typography>
             </Grid>
           </Grid>
-        </ListItem>
+        </ListItemButton>
       ))}
     </List>
   )

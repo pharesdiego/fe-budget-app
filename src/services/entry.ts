@@ -5,20 +5,15 @@ import { APIResponse, Entry } from "@/utils/types";
 export interface GetEntriesParams {
   from: ISODate;
   until: ISODate;
-  type?: "expense" | "income";
 }
 
 export const getEntries = async (params: GetEntriesParams): Promise<APIResponse<Entry[]>> => {
-  const { from, until, type } = params;
+  const { from, until } = params;
 
   const queryString = new URLSearchParams({
     from: getISODate(from),
     until: getISODate(until),
   });
-
-  if (type) {
-    queryString.append("type", type);
-  }
 
   return await fetch(`${baseURL}/entries?${queryString.toString()}`, {
     cache: "no-store",
@@ -46,7 +41,37 @@ export const createEntry = async (entry: CreateEntry) => {
   return await fetch(`${baseURL}/entries`, {
     method: "POST",
     body: data,
-    mode: "no-cors",
-    redirect: "follow",
   })
 };
+
+export const getEntryById = async (entryId: string): Promise<APIResponse<Entry>> => {
+  return await fetch(`${baseURL}/entries/${entryId}`, {
+    cache: "no-store"
+  }).then((res) => res.json());
+}
+
+export const deleteEntry = async (entryId: string): Promise<void> => {
+  await fetch(`${baseURL}/entries/${entryId}`, {
+    method: "DELETE",
+  }).then(res => res.text())
+}
+
+interface EditEntry extends CreateEntry {
+  id: string;
+}
+
+export const editEntry = async (entry: EditEntry): Promise<void> => {
+  const data = new FormData();
+  const { id, ...values } = entry;
+
+  for (const key in values) {
+    // @ts-ignore
+    data.append(key, String(entry[key]));
+  }
+
+
+  await fetch(`${baseURL}/entries/${id}`, {
+    method: "PUT",
+    body: data,
+  }).then((res) => res.text());
+}

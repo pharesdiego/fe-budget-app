@@ -7,17 +7,18 @@ import { useFormik } from "formik";
 import { number, object, string } from "yup";
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
-import { Account, Category } from "@/utils/types";
-import { createEntry } from "@/services/entry";
+import { Account, Category, Entry } from "@/utils/types";
+import { editEntry } from "@/services/entry";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import OptionsInput from "@/components/OptionsInput";
-import { getISODate, getToday } from "@/utils/dates";
 import AppButton from "@/components/AppButton";
+import dayjs from "dayjs";
 
-interface CreateEntryFormProps {
+interface EditEntryFormProps {
   accounts: Account[];
   categories: Category[];
+  entry: Entry;
 }
 
 const validationSchema = object({
@@ -39,23 +40,24 @@ interface FormValues {
 }
 
 
-const CreateEntryForm = (props: CreateEntryFormProps) => {
-  const [isCreating, setIsCreating] = useState(false);
-  const { accounts, categories } = props;
+const EditEntryForm = (props: EditEntryFormProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const { accounts, categories, entry } = props;
   const router = useRouter();
-  const { handleSubmit, handleChange, values, setFieldValue } = useFormik<FormValues>({
+  const { handleSubmit, handleChange, setFieldValue, values } = useFormik<FormValues>({
     initialValues: {
-      type: "expense",
-      amount: "",
-      category: undefined,
-      account: undefined,
-      description: "",
-      date: getISODate(getToday()),
+      type: entry.amount < 0 ? "expense" : "income",
+      amount: String(entry.amount),
+      category: Number(entry.category.id),
+      account: Number(entry.account.id),
+      description: entry.description,
+      date: entry.date,
     },
     onSubmit: (values) => {
-      setIsCreating(true);
+      setIsEditing(true);
 
-      createEntry({
+      editEntry({
+        id: entry.id,
         amount: +values.amount * (values.type === "expense" ? -1 : 1),
         category: values.category as number,
         account: values.account as number,
@@ -63,11 +65,10 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
         date: values.date as string,
       })
         .then(() => router.push("/"))
-        .finally(() => setIsCreating(false))
+        .finally(() => setIsEditing(false))
     },
     validationSchema,
   });
-
 
   const accountsOptions = accounts.map((account) => ({
     label: account.name,
@@ -92,13 +93,14 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
             { label: "Income", value: "income" },
           ]}
           radioGroupProps={{
-            defaultValue: "expense",
+            value: values.type,
             onChange: (_, val) => setFieldValue("type", val),
           }}
         />
       </Grid>
       <Grid xs={12}>
         <TextInput
+          value={values.amount}
           onChange={handleChange}
           name="amount"
           label="Amount"
@@ -107,6 +109,9 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
       </Grid>
       <Grid xs={12}>
         <SelectInput
+          SelectProps={{
+            value: values.account,
+          }}
           onChange={handleChange}
           name="account"
           label="Account"
@@ -116,6 +121,9 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
       </Grid>
       <Grid xs={12}>
         <SelectInput
+          SelectProps={{
+            value: values.category,
+          }}
           onChange={handleChange}
           name="category"
           label="Category"
@@ -126,7 +134,7 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
       <Grid xs={12}>
         <DateInput
           label="Date"
-          defaultValue={getToday()}
+          value={dayjs(values.date)}
           onChange={(date) => {
             if (date?.isValid()) {
               setFieldValue("date", date.toISOString())
@@ -136,6 +144,7 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
       </Grid>
       <Grid xs={12} marginBottom="3rem">
         <TextInput
+          value={values.description}
           onChange={handleChange}
           name="description"
           label="Description"
@@ -151,16 +160,16 @@ const CreateEntryForm = (props: CreateEntryFormProps) => {
           Cancel
         </AppButton>
         <AppButton
-          isWorking={isCreating}
+          isWorking={isEditing}
           type="submit"
           variant="contained"
           startIcon={<DoneIcon />}
         >
-          Create
+          Done
         </AppButton>
       </Grid>
     </Grid>
   )
 };
 
-export default CreateEntryForm;
+export default EditEntryForm;

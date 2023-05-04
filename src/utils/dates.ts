@@ -5,6 +5,7 @@ export enum DateFormats {
   DateSelectorDateFormat = "MMMM YYYY",
   QSDateFormat = "YYYY-MM",
   DatePicker = "DD/MM/YYYY",
+  EntryDetails = "DD MMMM YYYY"
 }
 
 export type ISODate = string | dayjs.Dayjs
