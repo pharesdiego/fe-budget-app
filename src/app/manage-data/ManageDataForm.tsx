@@ -2,7 +2,7 @@
 import AppButton from "@/components/AppButton"
 import CheckboxesInput from "@/components/CheckboxesInput"
 import SelectInput from "@/components/SelectInput"
-import { exportData } from "@/services/export"
+import { exportData } from "@/services/data"
 import { baseURL } from "@/utils/constants"
 import { UploadOutlined } from "@mui/icons-material"
 import { Unstable_Grid2 as Grid } from "@mui/material"
@@ -12,8 +12,12 @@ import { array, object, string } from "yup"
 const validationSchema = object({
   format: string().oneOf(["csv", "json"]).required(),
   include: array().of(string()).required(),
+});
 
-})
+type InitialValues = {
+  format: "csv" | "json";
+  include: string[];
+}
 
 const ManageDataForm = () => {
   const { handleChange, handleSubmit, setFieldValue } = useFormik({
@@ -21,9 +25,9 @@ const ManageDataForm = () => {
     initialValues: {
       format: "csv",
       include: ["income", "expense"]
-    },
+    } as InitialValues,
     onSubmit: (values) => {
-      console.log(values);
+      exportData(values);
     }
   });
 
